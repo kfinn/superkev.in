@@ -1,11 +1,18 @@
 .container {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: #eee;
   z-index: -1;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #131313;
+  }
 }
 
 .light {

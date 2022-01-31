@@ -6,6 +6,12 @@ body {
   color: #131313;
 }
 
+@media (prefers-color-scheme: dark) {
+  html, body {
+    color: #eee;
+  }
+}
+
 a {
   color: inherit;
 }

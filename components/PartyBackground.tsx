@@ -1,13 +1,17 @@
+import { useMediaQuery } from "@react-hook/media-query";
 import _ from "lodash";
 import { useMemo, useState } from "react";
 import useInterval from "use-interval";
 import styles from "./PartyBackground.module.css";
 
-function buildLightStyle(globalOffset: number, localOffset: number) {
-  const hue = Math.round((globalOffset + localOffset) % 360);
-  return {
-    background: `radial-gradient(circle at center, hsla(${hue}, 100%, 75%, 1) 5%, hsla(${hue}, 100%, 75%, 0) 45%)`
-  };
+function useLightStyle(globalOffset: number, localOffset: number) {
+  const prefersDarkColorScheme = useMediaQuery("(prefers-color-scheme: dark)");
+
+  return useMemo(() => {
+    const hue = Math.round((globalOffset + localOffset) % 360);
+    const lightness = prefersDarkColorScheme ? "15%" : "75%"
+    return { background: `radial-gradient(circle at center, hsla(${hue}, 100%, ${lightness}, 1) 5%, hsla(${hue}, 100%, ${lightness}, 0) 45%)` }
+  }, [prefersDarkColorScheme, globalOffset, localOffset]);
 }
 
 export default function PartyBackground() {
@@ -16,10 +20,10 @@ export default function PartyBackground() {
     setOffset((offset + 2) % 360);
   }, 60)
 
-  const light1Style = useMemo(() => buildLightStyle(offset, 0), [offset]);
-  const light2Style = useMemo(() => buildLightStyle(offset, 222), [offset]);
-  const light3Style = useMemo(() => buildLightStyle(offset, 85), [offset]);
-  const light4Style = useMemo(() => buildLightStyle(offset, 307), [offset]);
+  const light1Style = useLightStyle(offset, 0);
+  const light2Style = useLightStyle(offset, 222);
+  const light3Style = useLightStyle(offset, 85);
+  const light4Style = useLightStyle(offset, 307);
 
   return (
     <div className={styles.container}>
