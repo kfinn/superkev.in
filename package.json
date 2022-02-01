@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
-    "deploy": "npm run export && gh-pages -d out",
+    "deploy": "rm -rf node_modules/.cache out && next build && next export && touch out/.nojekyll && gh-pages -d out -t",
     "start": "next start",
     "lint": "next lint"
   },
