@@ -48,10 +48,7 @@ function LightGradient({ config: { id, innerStopColorValues, outerStopColorValue
 }
 
 export default function PartyBackground() {
-  const [width, height] = useWindowSize({
-    initialWidth: 1024,
-    initialHeight: 768,
-  });
+  const [width, height] = useWindowSize();
   const shorterDimension = useMemo(
     () => Math.min(width, height),
     [width, height]
