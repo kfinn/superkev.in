@@ -2,11 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import PartyBackground from '../components/PartyBackground'
+import RequireMount from '../components/RequireMount'
 import styles from './index.module.css'
 
 const Home: NextPage = () => {
   return <>
-    <PartyBackground />
+    <RequireMount>
+      <PartyBackground />
+    </RequireMount>
     <div className={styles.container}>
       <Head>
         <title>superkev.in</title>
@@ -40,7 +43,7 @@ const Home: NextPage = () => {
           </li>
           <li>
             <Link href="https://linkedin.com/in/kevinhfinn">LinkedIn</Link>: my
-            work history
+            employment history
           </li>
         </ul>
       </main>

@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.main li {
+  line-height: 1.4rem;
+}
+
 .domain {
   color: #337733;
+}
+
+.title a {
+  text-decoration: underline dashed;
 }

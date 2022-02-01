@@ -12,6 +12,7 @@
   "dependencies": {
     "@jdthornton/usetimeout": "^1.0.4",
     "@react-hook/media-query": "^1.1.1",
+    "@react-hook/window-size": "^3.0.7",
     "lodash": "^4.17.21",
     "next": "12.0.9",
     "react": "17.0.2",
