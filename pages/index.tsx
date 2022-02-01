@@ -29,28 +29,27 @@ const Home: NextPage = () => {
           <div>The personal website of Kevin Finn</div>
           <ul>
             <li>
-              <Link href="https://github.com/kfinn">GitHub</Link>: some code
-              I&apos;ve written
+              <Link href="https://github.com/kfinn">GitHub</Link>: code
             </li>
             <li>
               <Link href="https://www.twitch.tv/superkevin627">Twitch</Link>:
-              sometimes I stream myself programming here
+              programming livestreams
             </li>
             <li>
               <Link href="https://www.youtube.com/channel/UCI1DoNclLMm03_ZA4ncasyg">
                 YouTube
               </Link>
-              : some past programming streams
+              : recordings of past programming livestreams
             </li>
             <li>
               <Link href="https://instagram.com/charlie_dog_finn">
                 Instagram
               </Link>
-              : I intermittently maintain an Instagram for my dog, Charlie
+              : intermittently maintained photos of my dog, Charlie
             </li>
             <li>
               <Link href="https://linkedin.com/in/kevinhfinn">LinkedIn</Link>:
-              my employment history
+              employment history
             </li>
           </ul>
         </main>
