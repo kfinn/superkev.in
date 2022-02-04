@@ -1,17 +1,20 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { QueryClient, QueryClientProvider } from "react-query";
 import PartyBackground from "../components/PartyBackground";
-import RecentGithubRepos from "../components/RecentGithubRepos";
+import GithubListItem from "../components/GithubListItem";
 import RequireMount from "../components/RequireMount";
 import styles from "./index.module.css";
+import { fetchRepos, Repo } from "../state/Repo";
 
-const QUERY_CLIENT = new QueryClient();
+export async function getStaticProps() {
+  const staticRepos = await fetchRepos();
+  return { props: { staticRepos } };
+}
 
-const Home: NextPage = () => {
+export default function Home({ staticRepos }: { staticRepos: Repo[] }) {
   return (
-    <QueryClientProvider client={QUERY_CLIENT}>
+    <>
       <RequireMount>
         <PartyBackground />
       </RequireMount>
@@ -50,10 +53,7 @@ const Home: NextPage = () => {
           </h1>
           <div>The personal website of Kevin Finn</div>
           <ul>
-            <li>
-              <Link href="https://github.com/kfinn">GitHub</Link>: programming projects, such as...
-            </li>
-            <RecentGithubRepos />
+            <GithubListItem staticRepos={staticRepos} />
             <li>
               <Link href="https://www.twitch.tv/superkevin627">Twitch</Link>:
               programming livestreams
@@ -77,8 +77,6 @@ const Home: NextPage = () => {
           </ul>
         </main>
       </div>
-    </QueryClientProvider>
+    </>
   );
 };
-
-export default Home;
