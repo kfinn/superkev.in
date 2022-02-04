@@ -1,13 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { QueryClient, QueryClientProvider } from "react-query";
 import PartyBackground from "../components/PartyBackground";
+import RecentGithubRepos from "../components/RecentGithubRepos";
 import RequireMount from "../components/RequireMount";
 import styles from "./index.module.css";
 
+const QUERY_CLIENT = new QueryClient();
+
 const Home: NextPage = () => {
   return (
-    <>
+    <QueryClientProvider client={QUERY_CLIENT}>
       <RequireMount>
         <PartyBackground />
       </RequireMount>
@@ -20,9 +24,23 @@ const Home: NextPage = () => {
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="favicon.ico" />
-          <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-          <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon-16x16.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="apple-touch-icon.png"
+          />
           <link rel="manifest" href="site.webmanifest" />
         </Head>
 
@@ -33,8 +51,9 @@ const Home: NextPage = () => {
           <div>The personal website of Kevin Finn</div>
           <ul>
             <li>
-              <Link href="https://github.com/kfinn">GitHub</Link>: code
+              <Link href="https://github.com/kfinn">GitHub</Link>: programming projects, such as...
             </li>
+            <RecentGithubRepos />
             <li>
               <Link href="https://www.twitch.tv/superkevin627">Twitch</Link>:
               programming livestreams
@@ -58,7 +77,7 @@ const Home: NextPage = () => {
           </ul>
         </main>
       </div>
-    </>
+    </QueryClientProvider>
   );
 };
 
