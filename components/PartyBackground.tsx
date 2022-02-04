@@ -10,7 +10,7 @@ interface LightGradientConfig {
   id: string;
   innerStopColorValues: string;
   outerStopColorValues: string;
-};
+}
 
 function useLightGradientConfig(id: string, offset: number) {
   const prefersDarkColorScheme = useMediaQuery("(prefers-color-scheme: dark)");
@@ -23,28 +23,52 @@ function useLightGradientConfig(id: string, offset: number) {
     () =>
       _.map(
         [..._.range(COLORS_COUNT), 0],
-        (index) =>
-          Math.round(offset + (360 * index) / COLORS_COUNT) % 360
+        (index) => Math.round(offset + (360 * index) / COLORS_COUNT) % 360
       ),
     [offset]
   );
 
-  return useMemo(() => ({
-    id,
-    innerStopColorValues: _.join(_.map(hues, (hue) => `hsla(${hue}, 100%, ${lightness}, 1)`), ";"),
-    outerStopColorValues: _.join(_.map(hues, (hue) => `hsla(${hue}, 100%, ${lightness}, 0)`), ";"),
-  }), [hues, id, lightness]);
+  return useMemo(
+    () => ({
+      id,
+      innerStopColorValues: _.join(
+        _.map(hues, (hue) => `hsla(${hue}, 100%, ${lightness}, 1)`),
+        ";"
+      ),
+      outerStopColorValues: _.join(
+        _.map(hues, (hue) => `hsla(${hue}, 100%, ${lightness}, 0)`),
+        ";"
+      ),
+    }),
+    [hues, id, lightness]
+  );
 }
 
-function LightGradient({ config: { id, innerStopColorValues, outerStopColorValues } }: { config: LightGradientConfig }) {
-  return <radialGradient id={id}>
-    <stop offset="5%">
-      <animate attributeName="stop-color" values={innerStopColorValues} dur="7s" repeatCount="indefinite" />
-    </stop>
-    <stop offset="65%">
-      <animate attributeName="stop-color" values={outerStopColorValues} dur="7s" repeatCount="indefinite" />
-    </stop>
-  </radialGradient>
+function LightGradient({
+  config: { id, innerStopColorValues, outerStopColorValues },
+}: {
+  config: LightGradientConfig;
+}) {
+  return (
+    <radialGradient id={id}>
+      <stop offset="5%">
+        <animate
+          attributeName="stop-color"
+          values={innerStopColorValues}
+          dur="7s"
+          repeatCount="indefinite"
+        />
+      </stop>
+      <stop offset="65%">
+        <animate
+          attributeName="stop-color"
+          values={outerStopColorValues}
+          dur="7s"
+          repeatCount="indefinite"
+        />
+      </stop>
+    </radialGradient>
+  );
 }
 
 export default function PartyBackground() {
@@ -75,30 +99,41 @@ export default function PartyBackground() {
         <LightGradient config={light4GradientConfig} />
       </defs>
 
-      <circle
-        cx="0"
-        cy="0"
-        r={shorterDimension}
-        fill={`url('#${light1GradientConfig.id}')`}
-      />
-      <circle
-        cx={width}
-        cy="0"
-        r={shorterDimension}
-        fill={`url('#${light2GradientConfig.id}')`}
-      />
-      <circle
-        cx={width}
-        cy={height}
-        r={shorterDimension}
-        fill={`url('#${light3GradientConfig.id}')`}
-      />
-      <circle
-        cx="0"
-        cy={height}
-        r={shorterDimension}
-        fill={`url('#${light4GradientConfig.id}')`}
-      />
+      <g>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from={`0 ${width / 2} ${height / 2}`}
+          to={`360 ${width / 2} ${height / 2}`}
+          dur="127s"
+          repeatCount="indefinite"
+        />
+        <circle
+          cx="0"
+          cy="0"
+          r={shorterDimension}
+          fill={`url('#${light1GradientConfig.id}')`}
+        />
+        <circle
+          cx={width}
+          cy="0"
+          r={shorterDimension}
+          fill={`url('#${light2GradientConfig.id}')`}
+        />
+        <circle
+          cx={width}
+          cy={height}
+          r={shorterDimension}
+          fill={`url('#${light3GradientConfig.id}')`}
+        />
+        <circle
+          cx="0"
+          cy={height}
+          r={shorterDimension}
+          fill={`url('#${light4GradientConfig.id}')`}
+        />
+      </g>
     </svg>
   );
 }
