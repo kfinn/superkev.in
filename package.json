@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "deploy": "rm -rf node_modules/.cache out && next build && next export && touch out/.nojekyll && gh-pages -d out -t",
+    "deploy": "rm -rf node_modules/.cache out && next build && next export && touch out/.nojekyll && echo superkev.in > out/CNAME && gh-pages -d out -t",
     "start": "next start",
     "lint": "next lint"
   },

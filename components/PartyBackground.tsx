@@ -59,7 +59,7 @@ function LightGradient({
           repeatCount="indefinite"
         />
       </stop>
-      <stop offset="65%">
+      <stop offset="57%">
         <animate
           attributeName="stop-color"
           values={outerStopColorValues}
@@ -73,10 +73,12 @@ function LightGradient({
 
 export default function PartyBackground() {
   const [width, height] = useWindowSize();
-  const shorterDimension = useMemo(
-    () => Math.min(width, height),
+  const longerDimension = useMemo(
+    () => Math.max(width, height),
     [width, height]
   );
+  const horizontalMargin = useMemo(() => Math.min(width - height, 0) / 2, [width, height]);
+  const verticalMargin = useMemo(() => Math.min(height - width, 0) / 2, [width, height]);
 
   const light1GradientConfig = useLightGradientConfig("light1", 0);
   const light2GradientConfig = useLightGradientConfig("light2", 222);
@@ -106,31 +108,31 @@ export default function PartyBackground() {
           type="rotate"
           from={`0 ${width / 2} ${height / 2}`}
           to={`360 ${width / 2} ${height / 2}`}
-          dur="127s"
+          dur="57s"
           repeatCount="indefinite"
         />
         <circle
-          cx="0"
-          cy="0"
-          r={shorterDimension}
+          cx={horizontalMargin}
+          cy={verticalMargin}
+          r={longerDimension}
           fill={`url('#${light1GradientConfig.id}')`}
         />
         <circle
-          cx={width}
-          cy="0"
-          r={shorterDimension}
+          cx={width - horizontalMargin}
+          cy={verticalMargin}
+          r={longerDimension}
           fill={`url('#${light2GradientConfig.id}')`}
         />
         <circle
-          cx={width}
-          cy={height}
-          r={shorterDimension}
+          cx={width - horizontalMargin}
+          cy={height - verticalMargin}
+          r={longerDimension}
           fill={`url('#${light3GradientConfig.id}')`}
         />
         <circle
-          cx="0"
-          cy={height}
-          r={shorterDimension}
+          cx={horizontalMargin}
+          cy={height - verticalMargin}
+          r={longerDimension}
           fill={`url('#${light4GradientConfig.id}')`}
         />
       </g>
