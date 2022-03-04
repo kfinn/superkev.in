@@ -1,18 +1,12 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import PartyBackground from "../components/PartyBackground";
 import GithubListItem from "../components/GithubListItem";
+import PartyBackground from "../components/PartyBackground";
 import RequireMount from "../components/RequireMount";
+import YoutubeListItem from "../components/YoutubeListItem";
 import styles from "./index.module.css";
-import { fetchRepos, Repo } from "../state/Repo";
 
-export async function getStaticProps() {
-  const staticRepos = await fetchRepos();
-  return { props: { staticRepos } };
-}
-
-export default function Home({ staticRepos }: { staticRepos: Repo[] }) {
+export default function Home() {
   return (
     <>
       <RequireMount>
@@ -53,17 +47,12 @@ export default function Home({ staticRepos }: { staticRepos: Repo[] }) {
           </h1>
           <div>The personal website of Kevin Finn</div>
           <ul>
-            <GithubListItem staticRepos={staticRepos} />
+            <GithubListItem />
             <li>
               <Link href="https://www.twitch.tv/superkevin627">Twitch</Link>:
               programming livestreams
             </li>
-            <li>
-              <Link href="https://www.youtube.com/channel/UCI1DoNclLMm03_ZA4ncasyg">
-                YouTube
-              </Link>
-              : recordings of past programming livestreams
-            </li>
+            <YoutubeListItem />
             <li>
               <Link href="https://instagram.com/charlie_dog_finn">
                 Instagram
