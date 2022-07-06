@@ -1,13 +1,9 @@
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import '../styles/globals.css';
-
-const QUERY_CLIENT = new QueryClient();
+import '../styles/prism.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <QueryClientProvider client={QUERY_CLIENT}>
-    <Component {...pageProps} />
-  </QueryClientProvider>
+  return <Component {...pageProps} />
 }
 
 export default MyApp
