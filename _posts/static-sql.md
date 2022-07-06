@@ -191,11 +191,7 @@ sql_select_to_string :: ($select: string, $from: string, $Where: Type) -> string
 
     print_to_builder(*string_builder, "SELECT % ", select);
     print_to_builder(*string_builder, "FROM % ", from);
-
-    where_string := Where.to_string();
-    if where_string != "" {
-      print_to_builder(*string_builder, "WHERE % ", where_string);
-    }
+    print_to_builder(*string_builder, "WHERE % ", Where.to_string());
 
     return builder_to_string(*string_builder);
   }();
