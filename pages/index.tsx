@@ -39,6 +39,7 @@ export default function Home() {
             href="apple-touch-icon.png"
           />
           <link rel="manifest" href="site.webmanifest" />
+          <a rel="me" href="https://mastodon.social/@superkevin" />
         </Head>
 
         <main className={styles.main}>
